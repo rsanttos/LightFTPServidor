@@ -8,7 +8,17 @@ import java.net.Socket;
 import java.time.Instant;
 import java.util.Date;
 
+import br.ufrn.protocolos.lightftp.requisicao.RequisicaoListaArquivos;
+import br.ufrn.protocolos.lightftp.requisicao.TipoRequisicao;
+import br.ufrn.protocolos.lightftp.validacao.ValidaRequisicao;
+
 public class Servidor {
+
+	private RequisicaoListaArquivos requisicaoListaArquivos;
+
+	public Servidor() {
+	}
+
 	public void iniciaServidor() throws IOException {
 		System.out.println("Servidor em execução.");
 		while (true) {
@@ -23,6 +33,21 @@ public class Servidor {
 			inBytes.read(dadosRecedidos);
 			String mensagemRecebida = new String(dadosRecedidos).trim();
 			System.out.println("Cliente diz: " + mensagemRecebida);
+
+			String tipoRequisicao = ValidaRequisicao.tipo(mensagemRecebida);
+
+			if (tipoRequisicao.equals(TipoRequisicao.SOLICITACAO_LISTA_ARQUIVOS)) {
+				requisicaoListaArquivos = new RequisicaoListaArquivos();
+
+			} else if (tipoRequisicao.equals(TipoRequisicao.SOLICITACAO_DOWNLOAD_ARQUIVO)) {
+
+			} else if (tipoRequisicao.equals(TipoRequisicao.SOLICITACAO_UPLOAD_ARQUIVO)) {
+
+			} else if (tipoRequisicao.equals(TipoRequisicao.FINALIZAR_CONEXAO)) {
+
+			} else if (tipoRequisicao.equals(TipoRequisicao.REQUISICAO_INVALIDA)){
+
+			}
 
 			Instant instant = Instant.now();
 			long timeStampSegundos = instant.getEpochSecond();

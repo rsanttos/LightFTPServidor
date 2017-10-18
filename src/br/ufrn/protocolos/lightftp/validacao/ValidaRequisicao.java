@@ -22,8 +22,8 @@ public class ValidaRequisicao {
 		return valido;
 	}
 	
-	public static boolean tipo(String mensagem) {
-		boolean valido = false;
-		return valido;
+	public static String tipo(String mensagem) {
+		String tipoRequisicao = "";
+		return tipoRequisicao;
 	}
 }

@@ -9,7 +9,7 @@ public class RequisicaoListaArquivos {
 		diretorioPrincipal = "";
 	}
 	
-	public String recebeRequisicao(byte[] dados) {
+	public String processaRequisicao(String mensagem) {
 		String mensagemResposta = "";
 		// valida requisicao
 			// se válida
