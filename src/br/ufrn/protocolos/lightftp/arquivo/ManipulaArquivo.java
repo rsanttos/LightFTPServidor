@@ -9,6 +9,10 @@ import java.io.OutputStream;
 
 public class ManipulaArquivo {
 
+	public static String DIRETORIO_REMOTO_PRINCIPAL = "D:/Users/f043684/Desktop/Pessoal/engSoftware/lightftp/remoto";
+	public static String DIRETORIO_REMOTO_CLIENTE = "/cliente01";
+	public static String DIRETORIO_LOCAL_CLIENTE = "D:/Users/f043684/Desktop/Pessoal/engSoftware/lightftp/local";
+	
 	public static byte[] transformaArquivoEmBytes(File arquivo) {
 		int len = (int) arquivo.length();
 		byte[] sendBuf = new byte[len];
@@ -32,5 +36,17 @@ public class ManipulaArquivo {
 		os.flush();
 		System.out.println("Arquivo " + nomeArquivo + " criado com sucesso.");
 		os.close();
+	}
+	
+	public static String listarArquivos(String caminhoDiretorioCliente) {
+		String caminhoCompleto = DIRETORIO_REMOTO_PRINCIPAL + caminhoDiretorioCliente;
+		File diretorio = new File(caminhoCompleto);
+		String listaArquivos = "";
+		
+		for(File arquivo : diretorio.listFiles()) {
+			listaArquivos += arquivo.getName() + "\n";			
+		}
+		
+		return listaArquivos;
 	}
 }

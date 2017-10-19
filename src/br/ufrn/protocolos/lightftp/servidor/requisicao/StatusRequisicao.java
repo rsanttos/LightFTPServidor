@@ -1,4 +1,4 @@
-package br.ufrn.protocolos.lightftp.requisicao;
+package br.ufrn.protocolos.lightftp.servidor.requisicao;
 
 public class StatusRequisicao {
 	public static String SUCESSO = "SUCESSO";

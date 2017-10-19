@@ -1,4 +1,4 @@
-package br.ufrn.protocolos.lightftp.requisicao;
+package br.ufrn.protocolos.lightftp.servidor.requisicao;
 
 public class TipoRequisicao {
 	public static String SOLICITACAO_LISTA_ARQUIVOS = "SOLICITACAO_LISTA_ARQUIVOS";
