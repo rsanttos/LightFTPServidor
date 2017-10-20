@@ -25,10 +25,12 @@ public class RequisicaoListaArquivos extends RequisicaoGenerica {
 			mensagemResposta = StatusRequisicao.SUCESSO + "\n";
 			mensagemResposta += diretorioRemotoCliente + "\n";
 			mensagemResposta += listaArquivos;
+			bytesMensagemResposta = mensagemResposta.getBytes();
 		} else {
 			mensagemResposta += StatusRequisicao.MAL_FORMATADO + "\n";
+			bytesMensagemResposta = mensagemResposta.getBytes();
 		}
-		enviaResposta(mensagemResposta);
+		enviaResposta();
 	}
 
 }

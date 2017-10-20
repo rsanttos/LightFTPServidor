@@ -12,7 +12,10 @@ public class RequisicaoGenerica {
 	protected String mensagemRequisicao;
 	protected Socket socket;
 	protected String[] dadosMensagem;
-
+	
+	protected byte[] bytesMensagemResposta;
+	
+	
 	public RequisicaoGenerica() {
 	}
 
@@ -68,9 +71,21 @@ public class RequisicaoGenerica {
 	}
 
 
-	public void enviaResposta(String mensagem) throws IOException {
+	public void enviaResposta() throws IOException {
 		DataOutputStream outBytes = new DataOutputStream(socket.getOutputStream());
-		outBytes.write(mensagem.getBytes());
+		outBytes.write(bytesMensagemResposta);
+	}
+
+
+
+	public byte[] getBytesMensagemResposta() {
+		return bytesMensagemResposta;
+	}
+
+
+
+	public void setBytesMensagemResposta(byte[] bytesMensagemResposta) {
+		this.bytesMensagemResposta = bytesMensagemResposta;
 	}
 	
 }
