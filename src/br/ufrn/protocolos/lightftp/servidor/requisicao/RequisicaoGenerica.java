@@ -6,7 +6,6 @@ import java.net.Socket;
 
 public class RequisicaoGenerica {
 	
-	protected String diretorioRemotoCliente;	
 	protected String tipoRequisicao;
 	protected String mensagemResposta;
 	protected String mensagemRequisicao;
@@ -14,12 +13,11 @@ public class RequisicaoGenerica {
 	protected String[] dadosMensagem;
 	
 	protected byte[] bytesMensagemResposta;
+	protected byte[] bytesMensagemRequisicao;
 	
 	
 	public RequisicaoGenerica() {
-	}
-
-	
+	}	
 	
 	public RequisicaoGenerica(Socket socket, String mensagemRequisicao) {
 		super();
@@ -27,18 +25,14 @@ public class RequisicaoGenerica {
 		this.socket = socket;
 		this.tipoRequisicao = "";
 		this.mensagemResposta = "";
-		this.diretorioRemotoCliente = "";
 	}
 
-
-
-	public String getDiretorioRemotoCliente() {
-		return diretorioRemotoCliente;
+	public RequisicaoGenerica(Socket socket, byte[] bytesMensagemRequisicao) {
+		super();
+		this.socket = socket;
+		this.bytesMensagemRequisicao = bytesMensagemRequisicao;
 	}
 
-	public void setDiretorioRemotoCliente(String diretorioRemotoCliente) {
-		this.diretorioRemotoCliente = diretorioRemotoCliente;
-	}
 
 	public String getMensagemResposta() {
 		return mensagemResposta;
@@ -66,8 +60,7 @@ public class RequisicaoGenerica {
 	
 	public void entenderMensagemRequisicao() {
 		dadosMensagem = mensagemRequisicao.split("\n");
-		tipoRequisicao = dadosMensagem[0];
-		diretorioRemotoCliente = dadosMensagem[1];		
+		tipoRequisicao = dadosMensagem[0];		
 	}
 
 
@@ -76,13 +69,9 @@ public class RequisicaoGenerica {
 		outBytes.write(bytesMensagemResposta);
 	}
 
-
-
 	public byte[] getBytesMensagemResposta() {
 		return bytesMensagemResposta;
 	}
-
-
 
 	public void setBytesMensagemResposta(byte[] bytesMensagemResposta) {
 		this.bytesMensagemResposta = bytesMensagemResposta;

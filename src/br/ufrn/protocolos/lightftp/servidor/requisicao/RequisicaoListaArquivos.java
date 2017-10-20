@@ -21,9 +21,8 @@ public class RequisicaoListaArquivos extends RequisicaoGenerica {
 	public void processaRequisicao() throws IOException {
 		if (ValidaRequisicao.listaArquivos(mensagemRequisicao)) {
 			entenderMensagemRequisicao();
-			listaArquivos = ManipulaArquivo.listarArquivos(diretorioRemotoCliente);
+			listaArquivos = ManipulaArquivo.listarArquivos("");
 			mensagemResposta = StatusRequisicao.SUCESSO + "\n";
-			mensagemResposta += diretorioRemotoCliente + "\n";
 			mensagemResposta += listaArquivos;
 			bytesMensagemResposta = mensagemResposta.getBytes();
 		} else {

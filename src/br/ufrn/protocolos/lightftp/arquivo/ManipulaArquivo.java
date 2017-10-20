@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class ManipulaArquivo {
 
@@ -48,5 +49,16 @@ public class ManipulaArquivo {
 		}
 		
 		return listaArquivos;
+	}
+	
+	public static byte[] transformaArrayDinamicoEmEstatico(List<Byte> arrayDinamico) {
+		byte[] arrayEstatico = new byte[arrayDinamico.size()];
+		int i = 0;
+		for(Byte b : arrayDinamico) {
+			arrayEstatico[i] = b;
+			i++;
+		}
+		
+		return arrayEstatico;
 	}
 }

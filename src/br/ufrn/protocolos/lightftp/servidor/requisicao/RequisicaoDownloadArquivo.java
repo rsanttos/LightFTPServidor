@@ -68,7 +68,7 @@ public class RequisicaoDownloadArquivo extends RequisicaoGenerica {
 		// TODO Auto-generated method stub
 		super.entenderMensagemRequisicao();
 		String arquivoDownload = dadosMensagem[2];
-		nomeArquivoDownload = ManipulaArquivo.DIRETORIO_REMOTO_PRINCIPAL + diretorioRemotoCliente + "\\"
+		nomeArquivoDownload = ManipulaArquivo.DIRETORIO_REMOTO_PRINCIPAL + "\\"
 				+ arquivoDownload;
 	}
 
