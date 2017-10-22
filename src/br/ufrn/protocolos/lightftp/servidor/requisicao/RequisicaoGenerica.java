@@ -6,6 +6,8 @@ import java.net.Socket;
 
 public class RequisicaoGenerica {
 	
+	protected String caminhoDiretorioPrincipal = "arquivos/";
+	
 	protected String tipoRequisicao;
 	protected String mensagemResposta;
 	protected String mensagemRequisicao;
@@ -31,6 +33,8 @@ public class RequisicaoGenerica {
 		super();
 		this.socket = socket;
 		this.bytesMensagemRequisicao = bytesMensagemRequisicao;
+		this.tipoRequisicao = "";
+		this.mensagemResposta = "";
 	}
 
 

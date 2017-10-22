@@ -4,29 +4,38 @@ import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 
-import br.ufrn.protocolos.lightftp.arquivo.ManipulaArquivo;
+import br.com.servico.manipulaarquivo.Arquivo;
+import br.com.servico.mensagem.MensagemServico;
 import br.ufrn.protocolos.lightftp.validacao.ValidaRequisicao;
 
 public class RequisicaoDownloadArquivo extends RequisicaoGenerica {
 
 	private String nomeArquivoDownload;
+	private MensagemServico mensagemServico;
 
 	public RequisicaoDownloadArquivo() {
 		super();
+		mensagemServico = new MensagemServico();
 	}
 
 	public RequisicaoDownloadArquivo(Socket socket, String mensagemRequisicao) {
 		super(socket, mensagemRequisicao);
+		mensagemServico = new MensagemServico();
 	}
 
 	public void processaRequisicao() throws IOException {
 		if (ValidaRequisicao.downloadArquivo(mensagemRequisicao)) {
 			entenderMensagemRequisicao();
-			File arquivoParaDownload = new File("protocolo.txt");
-			byte[] bytesArquivo = ManipulaArquivo.transformaArquivoEmBytes(arquivoParaDownload);
+			String caminhoCompleto = caminhoDiretorioPrincipal + nomeArquivoDownload.trim();
+			File arquivoParaDownload = new File(caminhoCompleto);
+			byte[] bytesArquivo = Arquivo.fileToByte(arquivoParaDownload);
 			mensagemResposta += StatusRequisicao.SUCESSO + "\n";
-			byte[] bytesStatus = mensagemResposta.getBytes();
-			bytesMensagemResposta = concatenaArraysBytes(bytesStatus, bytesArquivo);
+			mensagemResposta += bytesArquivo.length + "\n";
+			byte[] bytesCabecalho = mensagemResposta.getBytes();
+			bytesMensagemResposta = mensagemServico.concatenaArraysBytes(bytesCabecalho, bytesArquivo);
+			System.out.println(bytesMensagemResposta.length);
+			bytesMensagemResposta = mensagemServico.insereFinal(bytesMensagemResposta);
+			System.out.println(bytesMensagemResposta.length);
 		} else {
 			mensagemResposta += StatusRequisicao.TIPO_REQUISICAO_INEXISTENTE;
 			bytesMensagemResposta = mensagemResposta.getBytes();
@@ -34,42 +43,12 @@ public class RequisicaoDownloadArquivo extends RequisicaoGenerica {
 		enviaResposta();
 	}
 	
-	public byte[] concatenaArraysBytes(byte[] inicio, byte[] fim) {
-		byte[] arrayCompleto = new byte[inicio.length + fim.length];
-		
-		for(int i = 0 ; i < inicio.length ; i++) {
-			arrayCompleto[i] = inicio[i];
-		}
-		
-		int i = inicio.length;
-		for(int j = 0 ; j < fim.length ; j++, i++) {
-			arrayCompleto[i] = fim[j];
-		} 
-		
-		return arrayCompleto;
-	}
-
-	public String montaArrayBytesArquivo(byte[] array) {
-		String arrayStr = "";
-		for (int i = 0; i < array.length; i++) {
-			byte b = array[i];
-			if(i + 1 < array.length) {
-				arrayStr += b + ";";				
-			} else {
-				arrayStr += b;				
-			}
-		}
-		
-		return arrayStr;
-	}
 
 	@Override
 	public void entenderMensagemRequisicao() {
 		// TODO Auto-generated method stub
 		super.entenderMensagemRequisicao();
-		String arquivoDownload = dadosMensagem[2];
-		nomeArquivoDownload = ManipulaArquivo.DIRETORIO_REMOTO_PRINCIPAL + "\\"
-				+ arquivoDownload;
+		nomeArquivoDownload = dadosMensagem[1];		
 	}
 
 }

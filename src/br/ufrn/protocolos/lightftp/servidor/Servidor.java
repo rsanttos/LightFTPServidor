@@ -16,19 +16,22 @@ public class Servidor {
 	private RequisicaoListaArquivos requisicaoListaArquivos;
 	private RequisicaoDownloadArquivo requisicaoDownloadArquivo;
 	private RequisicaoUploadArquivo requisicaoUploadArquivo;
+	
+	private static int LIMITE_TAMANHO_ARQUIVO = 20000000;
 
 	public Servidor() {
 	}
 
 	public void iniciaServidor() throws IOException {
-		System.out.println("Servidor em execu��o.");
+		System.out.println("Servidor em execucao.");
 		while (true) {
 			ServerSocket connectionSocket = new ServerSocket(7777);
 			Socket socket = connectionSocket.accept();
 
 			DataInputStream inBytes = new DataInputStream(socket.getInputStream());
-			byte[] dadosRecebidos = new byte[128];
+			byte[] dadosRecebidos = new byte[LIMITE_TAMANHO_ARQUIVO];
 			inBytes.read(dadosRecebidos);
+			
 			String mensagemRecebida = new String(dadosRecebidos);
 
 			String tipoRequisicao = ValidaRequisicao.tipo(mensagemRecebida);
