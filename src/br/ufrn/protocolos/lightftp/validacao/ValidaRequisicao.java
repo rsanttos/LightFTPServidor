@@ -1,12 +1,21 @@
 package br.ufrn.protocolos.lightftp.validacao;
 
+import br.com.servico.manipulaarquivo.Arquivo;
+import br.ufrn.protocolos.lightftp.servidor.requisicao.StatusRequisicao;
 import br.ufrn.protocolos.lightftp.servidor.requisicao.TipoRequisicao;
 
 public class ValidaRequisicao {
 
-	public static boolean listaArquivos(String mensagem) {
-		boolean valido = true;
-		return valido;
+	public static String listaArquivos() {
+		String status = "";
+		
+		if(Arquivo.qtdArquivosDiretorio() > 0) {
+			status = StatusRequisicao.SUCESSO;
+		} else {
+			status = StatusRequisicao.DIRETORIO_VAZIO ;
+		}
+		
+		return status;
 	}
 
 	public static boolean downloadArquivo(String mensagem) {

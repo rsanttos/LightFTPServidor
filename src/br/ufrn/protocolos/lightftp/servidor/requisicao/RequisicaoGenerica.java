@@ -9,6 +9,7 @@ public class RequisicaoGenerica {
 	protected String caminhoDiretorioPrincipal = "arquivos/";
 	
 	protected String tipoRequisicao;
+	protected String status;
 	protected String mensagemResposta;
 	protected String mensagemRequisicao;
 	protected Socket socket;
@@ -27,6 +28,7 @@ public class RequisicaoGenerica {
 		this.socket = socket;
 		this.tipoRequisicao = "";
 		this.mensagemResposta = "";
+		this.status = "";
 	}
 
 	public RequisicaoGenerica(Socket socket, byte[] bytesMensagemRequisicao) {
@@ -35,6 +37,7 @@ public class RequisicaoGenerica {
 		this.bytesMensagemRequisicao = bytesMensagemRequisicao;
 		this.tipoRequisicao = "";
 		this.mensagemResposta = "";
+		this.status = "";
 	}
 
 

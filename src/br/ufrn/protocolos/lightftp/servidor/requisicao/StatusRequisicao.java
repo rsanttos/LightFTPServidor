@@ -5,5 +5,5 @@ public class StatusRequisicao {
 	public static String MAL_FORMATADO = "MAL_FORMATADO";
 	public static String TIPO_REQUISICAO_INEXISTENTE = "TIPO_REQUISICAO_INEXISTENTE";
 	public static String ARQUIVO_NAO_ENCONTRADO = "ARQUIVO_NAO_ENCONTRADO";
-	public static String DIRETORIO_INVALIDO = "DIRETORIO_INVALIDO";
+	public static String DIRETORIO_VAZIO = "DIRETORIO_VAZIO";
 }

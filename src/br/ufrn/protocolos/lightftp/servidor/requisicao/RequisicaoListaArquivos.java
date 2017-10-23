@@ -18,14 +18,16 @@ public class RequisicaoListaArquivos extends RequisicaoGenerica {
 	}
 
 	public void processaRequisicao() throws IOException {
-		if (ValidaRequisicao.listaArquivos(mensagemRequisicao)) {
+		status = ValidaRequisicao.listaArquivos();
+		
+		if (status.equals(StatusRequisicao.SUCESSO)) {
 			entenderMensagemRequisicao();
-			listaArquivos = Arquivo.listarArquivosDoDiretorio("arquivos");
-			mensagemResposta = StatusRequisicao.SUCESSO + "\n";
+			listaArquivos = Arquivo.listarArquivosDoDiretorio();
+			mensagemResposta = status + "\n";
 			mensagemResposta += listaArquivos;
 			bytesMensagemResposta = mensagemResposta.getBytes();
 		} else {
-			mensagemResposta += StatusRequisicao.MAL_FORMATADO + "\n";
+			mensagemResposta += status + "\n";
 			bytesMensagemResposta = mensagemResposta.getBytes();
 		}
 		enviaResposta();
